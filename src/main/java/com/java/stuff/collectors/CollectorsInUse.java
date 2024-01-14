@@ -1,14 +1,15 @@
 package com.java.stuff.collectors;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import com.java.stuff.model.Person;
+import lombok.var;
 
+import static java.util.stream.Collectors.averagingDouble;
 import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.summingDouble;
 
@@ -75,6 +76,14 @@ public class CollectorsInUse {
     // partition by high sal
     Map sal = partitionBySal(personsList);
     sal.keySet().stream().forEach(key -> System.out.println(key + ":" + sal.get(key) ));
+
+    //averaging salaries
+    double doub = averagingDoubleSalary(personsList);
+    System.out.println(doub);
+
+    //a verage salaries by dept
+    var mapAvgSal = groupAverageSalariesByDept(personsList);
+    mapAvgSal.keySet().stream().forEach(key -> System.out.println(key + ":" + mapAvgSal.get(key)));
   }
 
   private static void printNames(List<Person> personList) {
@@ -113,6 +122,11 @@ public class CollectorsInUse {
         .collect(groupingBy(Person::getDepartment, Collectors.summingDouble(Person::getSalary)));
   }
 
+  private static Map<String, Double> groupAverageSalariesByDept(List<Person> personList) {
+    return personList
+        .stream()
+        .collect(groupingBy(Person::getDepartment, Collectors.averagingDouble(Person::getSalary)));
+  }
   //partition employees based on high salary benchmark
 
   private static Map<Boolean , List<Person>> partitionBySal(List<Person> personList) {
@@ -120,4 +134,12 @@ public class CollectorsInUse {
         .stream()
         .collect(Collectors.partitioningBy(person -> person.getSalary() > 6000.00));
   }
+
+  //Averaging double
+  private static double averagingDoubleSalary(List<Person> personList) {
+    return personList
+        .stream()
+        .collect(averagingDouble(Person::getSalary));
+  }
+
 }
