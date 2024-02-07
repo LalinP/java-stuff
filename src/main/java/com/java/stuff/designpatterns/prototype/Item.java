@@ -11,6 +11,11 @@ package com.java.stuff.designpatterns.prototype;
  *
  * However,
  * if it does not, then the subclass must also be declared abstract.
+ *
+ * No, you are not creating the instance of your abstract class here.
+ * Rather you are creating an instance of an anonymous subclass of your abstract class.
+ * And then you are invoking the method on your abstract class reference pointing to subclass object.
+ * https://stackoverflow.com/questions/13670991/can-we-instantiate-an-abstract-class
  */
 public abstract class Item implements Cloneable {
 
