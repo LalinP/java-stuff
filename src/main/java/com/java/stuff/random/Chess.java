@@ -11,7 +11,7 @@ public class Chess {
     //System.out.println("moves for pawn "+ pawnOneMoveCount(2,2, board));
     //printBoard(board);
     buildBoard(board, 5, 3);
-    System.out.println(bishopDiagonalCount(5,3, board));
+    System.out.println(kingMove(7,2, board));
     printBoard(board);
   }
 
@@ -24,6 +24,40 @@ public class Chess {
     }
   }
 
+  //move one step in any direction
+  public static int kingMove(int row, int column, String[][] board){
+    if(row > 7 || column > 7 || row < 0 || column < 0)
+      return 0;
+    int numberOfMoves = 0;
+
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        if ((Math.abs(column - j) == 0 || Math.abs(column - j) == 1)
+            && ((Math.abs(row - i) == 1 || Math.abs(row - i) == 0))) {
+          board[i][j] = "K";
+          numberOfMoves++;
+        }
+      }
+    }
+    return numberOfMoves;
+  }
+
+  //move horizontally or vertically
+  public static int rookMove(int row, int column, String[][] board){
+    if(row > 7 || column > 7 || row < 0 || column < 0)
+      return 0;
+    int numberOfMoves = 0;
+
+    for (int i = 0; i < 8; i++) {
+      for (int j = 0; j < 8; j++) {
+        if( column == j || row == i ) {
+          board[i][j] ="R";
+          numberOfMoves++;
+        }
+      }
+    }
+    return numberOfMoves;
+  }
   public static int bishopDiagonalCount(int row, int column, String[][] board){
     if(row > 7 || column > 7 )
       return 0;
