@@ -5,20 +5,21 @@ public class Chess {
   public static void main(String[] args) {
     String[][] board = new String[8][8];
 
-    //buildBoard(board, 2, 2);
-    //printBoard(board);
+    buildBoard(board, 2, 2);
+    printBoard(board);
     //System.out.println(Arrays.deepToString(board));
     //System.out.println("moves for pawn "+ pawnOneMoveCount(2,2, board));
     //printBoard(board);
-    buildBoard(board, 5, 3);
-    System.out.println(kingMove(7,2, board));
+    //buildBoard(board, 5, 3);
+    //System.out.println(bishopDiagonalCount(7,2, board));
     printBoard(board);
   }
 
   public static void printBoard(String[][] board) {
-    for (String[] x : board) {
-      for (String y : x) {
-        System.out.print(y + " ");
+    for (String[] row : board) {//for each row
+
+      for (String element : row) {
+        System.out.print(element + " ");
       }
       System.out.println();
     }
@@ -103,7 +104,7 @@ public class Chess {
           board[row][column] = String.valueOf(row);
         }
         else if(row == xPos && column == yPos){
-          board[row][column] = "B";
+          board[row][column] = "*";
         }else {
           board[row][column] = "-";
         }
