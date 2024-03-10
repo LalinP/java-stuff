@@ -38,7 +38,8 @@ public class GameOfLife {
       int counter = 0;
       for (int c = 0; c < lengthColumns; c++) {
         int currentX = r + dx[r];
-        if (isValidNeighbour(r, c, board) && abs(Integer.parseInt(board[r][c])) == 1) {
+        int currentY = c + dy[r];
+        if (isValidNeighbour(r, c, board) && abs(Integer.parseInt(board[currentX][currentY])) == 1) {
           counter++;
         }
         if (board[r][c] == "1" && (counter < 2 || counter > 3)) {
